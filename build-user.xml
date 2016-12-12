@@ -1,7 +1,24 @@
 <?xml version="1.0"?>
 <?eclipse.ant.import?>
 <project basedir="." default="">
-  <target name="jar" depends="build" description="Generate the distribution">
+  <target name="jar-processor" depends="build" description="Generate the distribution">
+    <property name="builder.name" value=""/>
+    <property name="version.num" value="0.99"/>
+    <buildnumber file="build.num"/>
+    <tstamp>
+      <format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss"/>
+    </tstamp>
+    <manifest file="MANIFEST.MF" mode="update">
+      <attribute name="Built-By" value="${builder.name}"/>
+      <attribute name="Implementation-Version" value="${version.num}-b${build.number}"/>
+      <attribute name="Built-Date" value="${TODAY}"/>
+    </manifest>
+    <jar jarfile="final_annotation_processor.jar" manifest="MANIFEST.MF">
+      <fileset dir="bin" includes="**/*.class" excludes="**/Final.class"/>
+      <fileset dir="." includes="META-INF/**/*" excludes="**/.DS_Store"/>
+    </jar>
+  </target>
+  <target name="jar-annotation" depends="build" description="Generate the distribution">
     <property name="builder.name" value=""/>
     <property name="version.num" value="0.99"/>
     <buildnumber file="build.num"/>
@@ -14,8 +31,8 @@
       <attribute name="Built-Date" value="${TODAY}"/>
     </manifest>
     <jar jarfile="final_annotation.jar" manifest="MANIFEST.MF">
-      <fileset dir="bin" includes="**/*.class" excludes="**/.DS_Store"/>
-      <fileset dir="." includes="META-INF/**/*" excludes="**/.DS_Store"/>
+      <fileset dir="bin" includes="**/Final.class"/>
     </jar>
   </target>
+
 </project>

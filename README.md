@@ -10,7 +10,7 @@ that fields not be final). Adapted from java8-change by John Shepard.
 To run:
 
 1. `ant jar`
-2. `javac -cp final_annotation.jar src/uk/org/cinquin/final_annotation/FinalTest.java` :
+2. `javac -cp final_annotation.jar:final_annotation_processor.jar src/uk/org/cinquin/final_annotation/FinalTest.java` :
 there should be a compile error
 3. `cd src; javac uk/org/cinquin/final_annotation/FinalTest.java` :
 there should not be any compile error

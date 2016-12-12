@@ -19,7 +19,7 @@ public class FinalTranslator extends TreeTranslator {
 	public void visitVarDef(JCTree.JCVariableDecl variableDeclaration) {
 		super.visitVarDef(variableDeclaration);
 		if (isFinalAnnotation(variableDeclaration.getModifiers())) {
-			variableDeclaration.mods = treeMaker.Modifiers(variableDeclaration.getModifiers().flags | Flags.FINAL);
+			variableDeclaration.mods.flags |= Flags.FINAL;
 		}
 	}
 
